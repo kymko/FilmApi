@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/listRecyclerFragment">
+
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.example.lesson2.ui.film_detail.fragment.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information" />
+    <fragment
+        android:id="@+id/listRecyclerFragment"
+        android:name="com.example.lesson2.ui.film_list.fragment.ListRecyclerFragment"
+        android:label="fragment_list_recycler"
+        tools:layout="@layout/fragment_list_recycler" />
+    <fragment
+        android:id="@+id/roomFragment"
+        android:name="com.example.lesson2.ui.RoomFragment"
+        android:label="fragment_room"
+        tools:layout="@layout/fragment_room" />
+</navigation>
