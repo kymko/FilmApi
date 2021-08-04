@@ -12,24 +12,23 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-      android:layout_alignParentStart="true"
+        android:layout_above="@+id/btn_basket"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/btn_basket"
+        app:defaultNavHost="true"
         app:navGraph="@navigation/my_nav" />
 
     <Button
         android:id="@+id/btn_basket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show downloaded"
-        android:textAllCaps="false"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:layout_margin="20dp"
-     />
+        android:text="Show downloaded"
+        android:textAllCaps="false" />
 
 
 </RelativeLayout>

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lesson2.R;
 import com.example.lesson2.data.model.Films;
+import com.example.lesson2.databinding.ItemListBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +19,23 @@ import java.util.List;
 public class GhibliAdapter extends RecyclerView.Adapter<GhibliAdapter.ViewHolder> {
 
     List<Films> list = new ArrayList<>();
-    private  Callback callback;
+    private Callback callback;
     private SaveRoom saveRoom;
+    private ItemListBinding binding;
 
-    public GhibliAdapter(Callback callback,SaveRoom saveRoom) {
+    public GhibliAdapter(Callback callback, SaveRoom saveRoom) {
         this.callback = callback;
         this.saveRoom = saveRoom;
     }
-    public GhibliAdapter(){}
+
+    public GhibliAdapter() {
+    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-
-        return new ViewHolder(view, callback,saveRoom);
+        binding = ItemListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding, callback, saveRoom, binding);
     }
 
     @Override
@@ -46,54 +49,36 @@ public class GhibliAdapter extends RecyclerView.Adapter<GhibliAdapter.ViewHolder
     }
 
     public void addItems(List<Films> film) {
-        list.clear();
         list.addAll(film);
         notifyDataSetChanged();
     }
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textTitleFilm;
-        private final TextView textDirectorFilm;
-        private ImageView imageView;
+        private ItemListBinding binding;
         private Callback callback;
         private SaveRoom saveRoom;
 
-        public ViewHolder(@NonNull View itemView,Callback callback,SaveRoom saveRoom) {
-            super(itemView);
+        public ViewHolder(@NonNull ItemListBinding itemView, Callback callback, SaveRoom saveRoom, ItemListBinding binding) {
+            super(itemView.getRoot());
             this.callback = callback;
             this.saveRoom = saveRoom;
-
-            textTitleFilm = itemView.findViewById(R.id.text_title_film);
-            textDirectorFilm = itemView.findViewById(R.id.text_director_film);
-            imageView = itemView.findViewById(R.id.image_save_to_room);
-
+            this.binding = binding;
         }
 
         public void onBind(Films film) {
-            textTitleFilm.setText(film.getTitle());
-            textDirectorFilm.setText(film.getProducer());
-
-
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    saveRoom.click(film);
-                }
-            });
-            textTitleFilm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callback.filmClick(film);
-                }
-            });
+            binding.textTitleFilm.setText(film.getTitle());
+            binding.textDirectorFilm.setText(film.getProducer());
+            binding.imageSaveToRoom.setOnClickListener(v -> saveRoom.click(film));
+            binding.textTitleFilm.setOnClickListener(v -> callback.filmClick(film));
 
         }
     }
-   public interface Callback{
+
+    public interface Callback {
         void filmClick(Films films);
     }
-    public interface SaveRoom{
+
+    public interface SaveRoom {
         void click(Films films);
     }
 }

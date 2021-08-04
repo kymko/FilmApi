@@ -34,6 +34,12 @@ public class Films {
         this.title = title;
     }
 
+    public Films(String title, String originalTitle, String description, String producer) {
+        this.title = title;
+        this.originalTitle = originalTitle;
+        this.description = description;
+        this.producer = producer;
+    }
 
     public String getProducer() {
         return producer;

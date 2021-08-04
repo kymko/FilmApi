@@ -27,14 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnSave = findViewById(R.id.btn_basket);
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavController navController = Navigation.findNavController(MainActivity.this,R.id.fragment);
-                navController.navigate(R.id.roomFragment);
+        btnSave.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(MainActivity.this,R.id.fragment);
+            navController.navigate(R.id.roomFragment);
 
 
-            }
         });
 
 
